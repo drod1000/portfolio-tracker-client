@@ -63,7 +63,7 @@ const PortfolioTrackerAppBar = (props) => {
             <MenuItem onClick={navigateToPortfolio}>Portfolio</MenuItem>
             <MenuItem onClick={navigateToWatchlist}>Watchlist</MenuItem>
           </Menu>
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h6" color="secondary">
             Portfolio Tracker
           </Typography>
         </Toolbar>

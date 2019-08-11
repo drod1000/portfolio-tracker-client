@@ -12,7 +12,7 @@ import { withStyles } from '@material-ui/styles';
 const styles = {
   paper: {
     padding: 24,
-    minWidth: '1024px'
+    minWidth: 1024
   },
   typography: {
     marginBottom: 12

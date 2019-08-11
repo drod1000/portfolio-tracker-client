@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import cyan from '@material-ui/core/colors/cyan';
+import grey from '@material-ui/core/colors/grey';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -12,8 +12,8 @@ import Watchlist from './components/containers/Watchlist/Watchlist';
 
 const theme = createMuiTheme({
   palette: {
-    primary: blueGrey,
-    secondary: cyan
+    primary: lightBlue,
+    secondary: grey
   },
 });
 
