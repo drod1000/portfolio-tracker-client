@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { Route, Switch } from "react-router-dom";
-import { createStore} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import grey from '@material-ui/core/colors/grey';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -20,10 +21,14 @@ const theme = createMuiTheme({
   },
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   positionsReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
+)
 
 function App() {
   return (
