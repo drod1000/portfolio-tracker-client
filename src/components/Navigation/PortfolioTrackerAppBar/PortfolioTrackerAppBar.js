@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import PropTypes from 'prop-types';
 import { AppBar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,7 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/styles';
-
 
 const styles = {
   root: {
@@ -24,11 +24,27 @@ const PortfolioTrackerAppBar = (props) => {
   const { classes } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  function handleClick(event) {
+  function handleMenuButtonClick(event) {
     setAnchorEl(event.currentTarget);
   }
 
-  function handleClose() {
+  function navigateToPortfolio() {
+    setAnchorEl(null);
+
+    if (props.history.location.pathname !== '/portfolio') {
+      props.history.push('/portfolio');
+    }
+  }
+
+  function navigateToWatchlist() {
+    setAnchorEl(null);
+
+    if (props.history.location.pathname !== '/watchlist') {
+      props.history.push('/watchlist');
+    }
+  }
+
+  function handleMenuClose() {
     setAnchorEl(null);
   }
 
@@ -36,16 +52,16 @@ const PortfolioTrackerAppBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleClick}>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleMenuButtonClick}>
             <MenuIcon />
           </IconButton>
           <Menu
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
-            onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Portfolio</MenuItem>
-            <MenuItem onClick={handleClose}>Watchlist</MenuItem>
+            onClose={handleMenuClose}>
+            <MenuItem onClick={navigateToPortfolio}>Portfolio</MenuItem>
+            <MenuItem onClick={navigateToWatchlist}>Watchlist</MenuItem>
           </Menu>
           <Typography variant="h6" color="inherit">
             Portfolio Tracker
@@ -60,4 +76,4 @@ PortfolioTrackerAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(PortfolioTrackerAppBar);
+export default withStyles(styles)(withRouter(PortfolioTrackerAppBar));
