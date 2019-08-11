@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/styles';
 
 import Aux from '../Aux/Aux';
@@ -20,9 +20,9 @@ class Layout extends Component {
     return (
       <Aux>
         <PortfolioTrackerAppBar></PortfolioTrackerAppBar>
-        <Container className={classes.container}>
+        <Grid className={classes.container} container justify = "center">
           {this.props.children}
-        </Container>
+        </Grid>
       </Aux>
     )
   }
