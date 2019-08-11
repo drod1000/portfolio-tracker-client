@@ -8,7 +8,6 @@ import PortfolioTrackerAppBar from '../../Navigation/PortfolioTrackerAppBar/Port
 class Layout extends Component {
 
   render () {
-    const { classes } = this.props;
     return (
       <Aux>
         <PortfolioTrackerAppBar></PortfolioTrackerAppBar>
