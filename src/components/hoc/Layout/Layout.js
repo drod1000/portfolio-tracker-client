@@ -1,13 +1,13 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/styles';
 
 import Aux from '../Aux/Aux';
 import PortfolioTrackerAppBar from '../../Navigation/PortfolioTrackerAppBar/PortfolioTrackerAppBar';
 
 const styles = {
-  paper: {
+  container: {
     padding: 24,
     margin: 12
   }
@@ -20,9 +20,9 @@ class Layout extends Component {
     return (
       <Aux>
         <PortfolioTrackerAppBar></PortfolioTrackerAppBar>
-        <Paper className={classes.paper}>
+        <Container className={classes.container}>
           {this.props.children}
-        </Paper>
+        </Container>
       </Aux>
     )
   }
