@@ -6,6 +6,7 @@ const createData = (symbol, quantity, price) => {
 
 export const initPositions = () => {
   return dispatch => {
+    dispatch(loadPositionsInProgress());
     setTimeout(() => {
       const positions = [
         createData('AAPL', 10, 175.00),
@@ -21,6 +22,12 @@ export const initPositions = () => {
       ];
       dispatch(loadPositionsSuccess(positions));
     }, 3000)
+  }
+}
+
+export const loadPositionsInProgress = () => {
+  return {
+    type: actionTypes.LOAD_POSITIONS_IN_PROGRESS
   }
 }
 
