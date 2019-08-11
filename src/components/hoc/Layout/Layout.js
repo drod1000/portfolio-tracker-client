@@ -1,13 +1,14 @@
 import React , { Component } from 'react';
 
 import Aux from '../Aux/Aux';
+import PortfolioTrackerAppBar from '../../Navigation/PortfolioTrackerAppBar/PortfolioTrackerAppBar';
 
 class Layout extends Component {
 
   render () {
     return (
       <Aux>
-        <div>Toolbar goes here</div>
+        <PortfolioTrackerAppBar></PortfolioTrackerAppBar>
         <main>
           Main goes here
         </main>
