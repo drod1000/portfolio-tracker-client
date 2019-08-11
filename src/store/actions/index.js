@@ -1,0 +1,3 @@
+export {
+  initPositions
+} from './positions';
