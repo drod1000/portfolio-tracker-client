@@ -52,7 +52,7 @@ const PortfolioTrackerAppBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleMenuButtonClick}>
+          <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu" onClick={handleMenuButtonClick}>
             <MenuIcon />
           </IconButton>
           <Menu
