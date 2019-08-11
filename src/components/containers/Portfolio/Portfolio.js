@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 
 import PortfolioTable from '../../PortfolioTable/PortfolioTable';
+import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
   paper: {
@@ -17,6 +19,10 @@ const styles = {
 }
 
 class Portfolio extends Component {
+  componentDidMount() {
+    this.props.initPositions();
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -38,4 +44,16 @@ Portfolio.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Portfolio);
+const mapStateToProps = (state) => {
+  return {
+    positions: state.positions
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initPositions: () => dispatch(actionCreators.initPositions())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Portfolio));
