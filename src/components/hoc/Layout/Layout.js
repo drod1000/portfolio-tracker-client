@@ -10,7 +10,7 @@ class Layout extends Component {
       <Aux>
         <PortfolioTrackerAppBar></PortfolioTrackerAppBar>
         <main>
-          Main goes here
+          {this.props.children}
         </main>
       </Aux>
     )
