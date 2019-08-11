@@ -25,6 +25,11 @@ class Portfolio extends Component {
 
   render() {
     const { classes } = this.props;
+    let table = null;
+
+    if (this.props.positions) {
+      table = <PortfolioTable positions={this.props.positions} />
+    }
 
     return (
       <Paper className={classes.paper}>
@@ -34,7 +39,7 @@ class Portfolio extends Component {
           color="primary">
           Portfolio
         </Typography>
-        <PortfolioTable />
+        {table}
       </Paper>
     )
   }
