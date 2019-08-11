@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = {
   paper: {
-    padding: 12,
+    padding: 24
   },
   typography: {
     marginBottom: 12
@@ -49,10 +49,20 @@ class Portfolio extends Component {
             <TableRow>
               <TableCell>Symbol</TableCell>
               <TableCell>Quantity</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Market Value</TableCell>
+              <TableCell>Price (USD)</TableCell>
+              <TableCell>Market Value (USD)</TableCell>
             </TableRow>
           </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.symbol}>
+                <TableCell>{row.symbol}</TableCell>
+                <TableCell>{row.quantity}</TableCell>
+                <TableCell>${row.price}</TableCell>
+                <TableCell>${row.marketValue}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       </Paper>
     )
