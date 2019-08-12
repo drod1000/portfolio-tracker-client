@@ -12,8 +12,10 @@ const PortfolioTable = (props) => {
         <TableRow>
           <TableCell>Symbol</TableCell>
           <TableCell>Quantity</TableCell>
-          <TableCell>Price (USD)</TableCell>
-          <TableCell>Market Value (USD)</TableCell>
+          <TableCell>Price ($)</TableCell>
+          <TableCell>Market Value ($)</TableCell>
+          <TableCell>Gain ($)</TableCell>
+          <TableCell>Gain (%)</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -21,8 +23,10 @@ const PortfolioTable = (props) => {
           <TableRow key={p.symbol}>
             <TableCell>{p.symbol}</TableCell>
             <TableCell>{p.quantity}</TableCell>
-            <TableCell>${p.price}</TableCell>
-            <TableCell>${p.marketValue}</TableCell>
+            <TableCell>${p.currentPrice.toFixed(2)}</TableCell>
+            <TableCell>${(p.currentPrice * p.quantity).toFixed(2)}</TableCell>
+            <TableCell>{((p.currentPrice - p.buyPrice) * p.quantity).toFixed(2)}</TableCell>
+            <TableCell>{((p.currentPrice - p.buyPrice) / p.currentPrice * 100).toFixed(2)}</TableCell>
           </TableRow>
         ))}
       </TableBody>
