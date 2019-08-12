@@ -12,7 +12,13 @@ const StyledTableCell = withStyles(theme => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14
+    fontSize: 14,
+    '&.positive': {
+      color: '#4caf50'
+    },
+    '&.negative': {
+      color: '#f44336'
+    }
   }
 }))(TableCell);
 
@@ -61,8 +67,14 @@ const PortfolioTable = (props) => {
             <StyledTableCell align="right">{p.quantity}</StyledTableCell>
             <StyledTableCell align="right">${p.currentPrice.toFixed(2)}</StyledTableCell>
             <StyledTableCell align="right">${p.marketValue.toFixed(2)}</StyledTableCell>
-            <StyledTableCell align="right">{p.dollarGain.toFixed(2)}</StyledTableCell>
-            <StyledTableCell align="right">{p.percentageGain.toFixed(2)}</StyledTableCell>
+            <StyledTableCell
+              className={p.dollarGain >= 0 ? 'positive' : 'negative'}
+              align="right">{p.dollarGain.toFixed(2)}
+            </StyledTableCell>
+            <StyledTableCell
+              className={p.percentageGain >= 0 ? 'positive' : 'negative'}
+              align="right">{p.percentageGain.toFixed(2)}
+            </StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>
