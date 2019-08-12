@@ -12,7 +12,7 @@ const StyledTableCell = withStyles(theme => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 14
   }
 }))(TableCell);
 
@@ -24,7 +24,24 @@ const StyledTableRow = withStyles(theme => ({
   },
 }))(TableRow);
 
+const generateRows = (positions) => {
+  const rows = positions.map(p => {
+    return {
+      symbol: p.symbol,
+      quantity: p.quantity,
+      currentPrice: p.currentPrice,
+      marketValue: (p.currentPrice * p.quantity),
+      dollarGain: ((p.currentPrice - p.buyPrice) * p.quantity),
+      percentageGain: ((p.currentPrice - p.buyPrice) / p.currentPrice * 100)
+    }
+  })
+
+  return rows;
+}
+
 const PortfolioTable = (props) => {
+  const rows = generateRows(props.positions);
+
   return (
     <Table>
       <TableHead>
@@ -38,14 +55,14 @@ const PortfolioTable = (props) => {
         </StyledTableRow>
       </TableHead>
       <TableBody>
-        {props.positions.map(p => (
+        {rows.map(p => (
           <StyledTableRow key={p.symbol}>
             <StyledTableCell align="right">{p.symbol}</StyledTableCell>
             <StyledTableCell align="right">{p.quantity}</StyledTableCell>
             <StyledTableCell align="right">${p.currentPrice.toFixed(2)}</StyledTableCell>
-            <StyledTableCell align="right">${(p.currentPrice * p.quantity).toFixed(2)}</StyledTableCell>
-            <StyledTableCell align="right">{((p.currentPrice - p.buyPrice) * p.quantity).toFixed(2)}</StyledTableCell>
-            <StyledTableCell align="right">{((p.currentPrice - p.buyPrice) / p.currentPrice * 100).toFixed(2)}</StyledTableCell>
+            <StyledTableCell align="right">${p.marketValue.toFixed(2)}</StyledTableCell>
+            <StyledTableCell align="right">{p.dollarGain.toFixed(2)}</StyledTableCell>
+            <StyledTableCell align="right">{p.percentageGain.toFixed(2)}</StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>
