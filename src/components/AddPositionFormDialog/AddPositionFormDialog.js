@@ -4,10 +4,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/styles';
 
+const useStyles = makeStyles({
+  button: {
+    width: '100%'
+  }
+})
 
 const AddPositionFormDialog = () => {
   const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
 
   const handleOpen = () => {
     setOpen(true);
@@ -23,7 +30,11 @@ const AddPositionFormDialog = () => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleOpen}>
+      <Button
+        className={classes.button}
+        variant="outlined"
+        color="primary"
+        onClick={handleOpen}>
         Add Position
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -43,6 +54,5 @@ const AddPositionFormDialog = () => {
     </div>
   )
 }
-
 
 export default AddPositionFormDialog;

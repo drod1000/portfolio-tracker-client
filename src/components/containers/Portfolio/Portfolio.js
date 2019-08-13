@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
@@ -34,13 +35,19 @@ class Portfolio extends Component {
 
     return (
       <Paper className={classes.paper}>
-        <Typography
-          className={classes.typography}
-          variant="h4"
-          color="primary">
-          Portfolio
-        </Typography>
-        <AddPositionFormDialog></AddPositionFormDialog>
+        <Grid container>
+          <Grid item xs={10}>
+            <Typography
+              className={classes.typography}
+              variant="h4"
+              color="primary">
+              Portfolio
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <AddPositionFormDialog></AddPositionFormDialog>
+          </Grid>
+        </Grid>
         {table}
       </Paper>
     )
