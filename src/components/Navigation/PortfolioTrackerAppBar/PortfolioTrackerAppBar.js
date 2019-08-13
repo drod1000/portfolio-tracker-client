@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from "react-router";
-import PropTypes from 'prop-types';
 import { AppBar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -70,10 +69,6 @@ const PortfolioTrackerAppBar = (props) => {
       </AppBar>
     </div>
   )
-}
-
-PortfolioTrackerAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default (withRouter(PortfolioTrackerAppBar));

@@ -4,6 +4,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
@@ -38,9 +40,15 @@ const AddPositionFormDialog = () => {
         Add Position
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle >Add Position</DialogTitle>
+        <DialogTitle disableTypography>
+          <Typography variant="h4" color="primary">
+            Add Position
+          </Typography>
+        </DialogTitle>
         <DialogContent>
-          Dialog content goes here
+          <TextField required label="Ticker Symbol" />
+          <TextField required label="Quantity" type="number" />
+          <TextField required label="Acquisition Price" type="number" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
