@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 
 import PortfolioTable from '../../PortfolioTable/PortfolioTable';
+import AddPositionFormDialog from '../../AddPositionFormDialog/AddPositionFormDialog';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
@@ -39,6 +40,7 @@ class Portfolio extends Component {
           color="primary">
           Portfolio
         </Typography>
+        <AddPositionFormDialog></AddPositionFormDialog>
         {table}
       </Paper>
     )
