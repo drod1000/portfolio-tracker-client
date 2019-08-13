@@ -8,9 +8,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     marginBottom: 24
@@ -18,11 +18,11 @@ const styles = {
   menuButton: {
     marginRight: 12
   }
-}
+})
 
 const PortfolioTrackerAppBar = (props) => {
-  const { classes } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
 
   function handleMenuButtonClick(event) {
     setAnchorEl(event.currentTarget);
@@ -76,4 +76,4 @@ PortfolioTrackerAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(withRouter(PortfolioTrackerAppBar));
+export default (withRouter(PortfolioTrackerAppBar));
