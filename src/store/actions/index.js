@@ -1,3 +1,4 @@
 export {
-  initPositions
+  initPositions,
+  initAddPosition
 } from './positions';
