@@ -4,20 +4,15 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 
+import { StyledDialogTitle } from '../styled/Dialog/Dialog';
+
 const useStyles = makeStyles({
   button: {
     width: '100%'
-  },
-  dialogTitle: {
-    backgroundColor: 'black',
-    color: '#FFFFFF',
-    textTransform: 'uppercase',
-    marginBottom: 12
   },
   dialogContent: {
     display: 'flex',
@@ -63,9 +58,9 @@ const AddPositionFormDialog = () => {
         maxWidth='sm'
         open={open}
         onClose={handleClose}>
-        <DialogTitle className={classes.dialogTitle}>
+        <StyledDialogTitle>
           Add Position
-        </DialogTitle>
+        </StyledDialogTitle>
         <DialogContent className={classes.dialogContent}>
           <TextField
             className={classes.formInput}
