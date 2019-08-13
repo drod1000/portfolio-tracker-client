@@ -1,4 +1,5 @@
 import React from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
@@ -16,6 +18,7 @@ const useStyles = makeStyles({
 
 const AddPositionFormDialog = () => {
   const [open, setOpen] = React.useState(false);
+  const [acquisitionDate, setAcquisitionDate] = React.useState(new Date());
   const classes = useStyles();
 
   const handleOpen = () => {
@@ -28,6 +31,10 @@ const AddPositionFormDialog = () => {
 
   const handleSave = () => {
     setOpen(false);
+  }
+
+  const handleAcquisitionDateChange = (date) => {
+    setAcquisitionDate(date);
   }
 
   return (
@@ -48,6 +55,17 @@ const AddPositionFormDialog = () => {
         <DialogContent>
           <TextField required label="Ticker Symbol" />
           <TextField required label="Quantity" type="number" />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              disableFuture
+              variant="inline"
+              format="MM/dd/yyyy"
+              label="Acquisition Date"
+              value={acquisitionDate}
+              onChange={handleAcquisitionDateChange}
+            />
+          </MuiPickersUtilsProvider>
           <TextField required label="Acquisition Price" type="number" />
         </DialogContent>
         <DialogActions>
