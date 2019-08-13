@@ -6,13 +6,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   button: {
     width: '100%'
+  },
+  dialogTitle: {
+    backgroundColor: 'black',
+    color: '#FFFFFF',
+    textTransform: 'uppercase',
+    marginBottom: 12
+  },
+  dialogContent: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  formInput: {
+    marginBottom: 8
   }
 })
 
@@ -46,17 +58,31 @@ const AddPositionFormDialog = () => {
         onClick={handleOpen}>
         Add Position
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle disableTypography>
-          <Typography variant="h4" color="primary">
-            Add Position
-          </Typography>
+      <Dialog
+        fullWidth={true}
+        maxWidth='sm'
+        open={open}
+        onClose={handleClose}>
+        <DialogTitle className={classes.dialogTitle}>
+          Add Position
         </DialogTitle>
-        <DialogContent>
-          <TextField required label="Ticker Symbol" />
-          <TextField required label="Quantity" type="number" />
+        <DialogContent className={classes.dialogContent}>
+          <TextField
+            className={classes.formInput}
+            required
+            variant="outlined"
+            label="Ticker Symbol"
+          />
+          <TextField
+            className={classes.formInput}
+            required
+            variant="outlined"
+            label="Quantity"
+            type="number"
+          />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
+              className={classes.formInput}
               disableToolbar
               disableFuture
               variant="inline"
@@ -66,13 +92,19 @@ const AddPositionFormDialog = () => {
               onChange={handleAcquisitionDateChange}
             />
           </MuiPickersUtilsProvider>
-          <TextField required label="Acquisition Price" type="number" />
+          <TextField
+            className={classes.formInput}
+            required
+            variant="outlined"
+            label="Acquisition Price"
+            type="number"
+          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button color="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={handleSave} color="primary">
+          <Button color="primary" onClick={handleSave}>
             Save
           </Button>
         </DialogActions>
