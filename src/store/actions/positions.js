@@ -43,3 +43,36 @@ export const loadPositionsFailure = () => {
     type: actionTypes.LOAD_POSITIONS_FAILURE
   }
 }
+
+export const initAddPosition = (position) => {
+  return dispatch => {
+    dispatch(addPositionInProgress());
+
+    setTimeout(() => {
+      const positionWithPrice = {
+        ...position,
+        currentPrice: 100.00
+      }
+      dispatch(addPositionSuccess(positionWithPrice));
+    }, 1500)
+  }
+}
+
+export const addPositionInProgress = () => {
+  return {
+    type: actionTypes.ADD_POSITION_IN_PROGRESS
+  }
+}
+
+export const addPositionSuccess = (position) => {
+  return {
+    type: actionTypes.ADD_POSITION_SUCCESS,
+    newPosition: position
+  }
+}
+
+export const addPositionFailure = () => {
+  return {
+    type: actionTypes.ADD_POSITION_FAILURE
+  }
+}
