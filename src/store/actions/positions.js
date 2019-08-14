@@ -49,7 +49,11 @@ export const initAddPosition = (position) => {
     dispatch(addPositionInProgress());
 
     setTimeout(() => {
-      dispatch(addPositionSuccess(position));
+      const positionWithPrice = {
+        ...position,
+        currentPrice: 100.00
+      }
+      dispatch(addPositionSuccess(positionWithPrice));
     }, 1500)
   }
 }

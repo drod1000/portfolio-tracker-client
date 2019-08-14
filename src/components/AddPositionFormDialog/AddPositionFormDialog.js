@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +10,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/picker
 import { withStyles } from '@material-ui/styles';
 
 import { StyledDialogTitle } from '../styled/Dialog/Dialog';
+import * as actionCreators from '../../store/actions/index';
 
 const styles = {
   button: {
@@ -46,7 +48,15 @@ class AddPositionFormDialog extends Component {
   }
 
   handleSave = () => {
-    console.log(this.state.formData);
+    const position = {
+      symbol: this.state.formData.tickerSymbol,
+      quantity: Number(this.state.formData.quantity),
+      acquisitionDate: this.state.formData.acquisitionDate,
+      buyPrice: Number(this.state.formData.acquisitionPrice)
+    }
+
+    this.setState({ open: false});
+    this.props.initAddPosition(position);
   }
 
   handleInputChange = (target) => {
@@ -138,4 +148,10 @@ class AddPositionFormDialog extends Component {
   }
 }
 
-export default (withStyles(styles)(AddPositionFormDialog));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initAddPosition: (position) => dispatch(actionCreators.initAddPosition(position))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(AddPositionFormDialog));
