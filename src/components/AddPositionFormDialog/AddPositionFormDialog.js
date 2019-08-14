@@ -46,12 +46,21 @@ class AddPositionFormDialog extends Component {
   }
 
   handleSave = () => {
-    this.setState({ open: false });
-    console.log(this.state);
+    console.log(this.state.formData);
+  }
+
+  handleInputChange = (target) => {
+    let updatedFormData = { ...this.state.formData };
+    updatedFormData[target.name] = target.value;
+
+    this.setState({ formData: updatedFormData });
   }
 
   handleAcquisitionDateChange = (date) => {
-    console.log('New date is', date);
+    let updatedFormData = { ...this.state.formData };
+    updatedFormData.acquisitionDate = date;
+
+    this.setState({ formData: updatedFormData });
   }
 
   render() {
@@ -80,13 +89,17 @@ class AddPositionFormDialog extends Component {
               required
               variant="outlined"
               label="Ticker Symbol"
+              name="tickerSymbol"
+              onChange={(event) => this.handleInputChange(event.target)}
             />
             <TextField
               className={classes.formInput}
               required
               variant="outlined"
               label="Quantity"
+              name="quantity"
               type="number"
+              onChange={(event) => this.handleInputChange(event.target)}
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -96,6 +109,7 @@ class AddPositionFormDialog extends Component {
                 variant="inline"
                 format="MM/dd/yyyy"
                 label="Acquisition Date"
+                name="acquisitionDate"
                 value={this.state.formData.acquisitionDate}
                 onChange={this.handleAcquisitionDateChange}
               />
@@ -105,7 +119,9 @@ class AddPositionFormDialog extends Component {
               required
               variant="outlined"
               label="Acquisition Price"
+              name="acquisitionPrice"
               type="number"
+              onChange={(event) => this.handleInputChange(event.target)}
             />
           </DialogContent>
           <DialogActions>
