@@ -25,6 +25,23 @@ const watchlistReducer = (state = initialState, action) => {
         isLoading: false,
         isError: true
       }
+    case actionTypes.ADD_WATCHLIST_ITEM_IN_PROGRESS:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case actionTypes.ADD_WATCHLIST_ITEM_SUCCESS:
+      return {
+          ...state,
+          watchlist: state.watchlist.concat(action.newItem),
+          isLoading: false
+        }
+    case actionTypes.ADD_WATCHLIST_ITEM_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      }
     default:
       return state;
   }

@@ -41,3 +41,37 @@ export const loadWatchlistFailure = () => {
     type: actionTypes.LOAD_WATCHLIST_FAILURE
   }
 }
+
+export const initAddWatchlistItem = (item) => {
+  return dispatch => {
+    dispatch(addWatchlistItemInProgress());
+
+    setTimeout(() => {
+      const itemWithPrice = {
+        ...item,
+        watchPrice: 80.00,
+        currentPrice: 75.00
+      }
+      dispatch(addWatchlistItemSuccess(itemWithPrice));
+    }, 1500)
+  }
+}
+
+export const addWatchlistItemInProgress = () => {
+  return {
+    type: actionTypes.ADD_WATCHLIST_ITEM_IN_PROGRESS
+  }
+}
+
+export const addWatchlistItemSuccess = (item) => {
+  return {
+    type: actionTypes.ADD_WATCHLIST_ITEM_SUCCESS,
+    newItem: item
+  }
+}
+
+export const addWatchlistItemFailure = () => {
+  return {
+    type: actionTypes.ADD_WATCHLIST_ITEM_FAILURE
+  }
+}

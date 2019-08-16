@@ -4,5 +4,6 @@ export {
 } from './positions';
 
 export {
-  initWatchlist
+  initWatchlist,
+  initAddWatchlistItem
 } from './watchlist';
