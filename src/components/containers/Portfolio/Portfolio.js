@@ -60,8 +60,8 @@ Portfolio.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    positions: state.positions,
-    isLoading: state.isLoading
+    positions: state.positions.positions,
+    isLoading: state.positions.isLoading
   }
 }
 

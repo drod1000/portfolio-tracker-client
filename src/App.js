@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { Route, Switch } from "react-router-dom";
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import grey from '@material-ui/core/colors/grey';
 import lightBlue from '@material-ui/core/colors/lightBlue';
@@ -13,6 +13,7 @@ import Layout from './components/hoc/Layout/Layout';
 import Portfolio from './components/containers/Portfolio/Portfolio';
 import Watchlist from './components/containers/Watchlist/Watchlist';
 import positionsReducer from './store/reducers/positions';
+import watchlistReducer from './store/reducers/watchlist';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,9 +23,10 @@ const theme = createMuiTheme({
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const reducer = combineReducers({ positions: positionsReducer, watchlist: watchlistReducer});
 
 const store = createStore(
-  positionsReducer,
+  reducer,
   composeEnhancers(
     applyMiddleware(thunk)
   )
