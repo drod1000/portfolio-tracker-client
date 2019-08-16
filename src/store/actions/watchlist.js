@@ -5,7 +5,10 @@ const createData = (symbol, watchDate, watchPrice, currentPrice) => {
 }
 
 export const initWatchlist = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { watchlist } = getState();
+    if (watchlist.isLoading || watchlist.isLoaded) { return; }
+
     dispatch(loadWatchlistInProgress());
     setTimeout(() => {
       const watchlist = [

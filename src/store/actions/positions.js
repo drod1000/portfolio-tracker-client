@@ -5,7 +5,10 @@ const createData = (symbol, quantity, buyPrice, currentPrice) => {
 }
 
 export const initPositions = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { positions } = getState();
+    if (positions.isLoading || positions.isLoaded) { return; }
+
     dispatch(loadPositionsInProgress());
     setTimeout(() => {
       const positions = [
