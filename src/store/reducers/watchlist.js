@@ -1,23 +1,23 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  positions: [],
+  watchlist: [],
   isLoading: false,
   isLoaded: false,
   isError: false
 }
 
-const positionsReducer = (state = initialState, action) => {
+const watchlistReducer = (state = initialState, action) => {
   switch(action.type) {
-    case actionTypes.LOAD_POSITIONS_IN_PROGRESS:
+    case actionTypes.LOAD_WATCHLIST_IN_PROGRESS:
       return {
         ...state,
         isLoading: true
       }
-    case actionTypes.LOAD_POSITIONS_SUCCESS:
+    case actionTypes.LOAD_WATCHLIST_SUCCESS:
       return {
         ...state,
-        positions: action.positions,
+        watchlist: action.watchlist,
         isLoading: false,
         isLoaded: true
       }
@@ -27,10 +27,10 @@ const positionsReducer = (state = initialState, action) => {
         isLoading: false,
         isError: true
       }
-    case actionTypes.ADD_POSITION_SUCCESS:
+    case actionTypes.ADD_WATCHLIST_ITEM_SUCCESS:
       return {
         ...state,
-        positions: state.positions.concat(action.newPosition),
+        watchlist: state.watchlist.concat(action.newItem),
         isLoading: false
       }
     default:
@@ -38,4 +38,4 @@ const positionsReducer = (state = initialState, action) => {
   }
 }
 
-export default positionsReducer;
+export default watchlistReducer;

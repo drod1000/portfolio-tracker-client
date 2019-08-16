@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
@@ -26,16 +26,14 @@ const styles = {
   }
 }
 
-class AddPositionFormDialog extends Component {
+class AddWatchlistItemFormDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
       formData: {
         tickerSymbol: '',
-        quantity: null,
-        acquisitionDate: new Date(),
-        acquisitionPrice: null
+        watchDate: new Date()
       }
     }
   }
@@ -49,29 +47,27 @@ class AddPositionFormDialog extends Component {
   }
 
   handleSave = () => {
-    const position = {
+    const item = {
       symbol: this.state.formData.tickerSymbol,
-      quantity: Number(this.state.formData.quantity),
-      acquisitionDate: this.state.formData.acquisitionDate,
-      buyPrice: Number(this.state.formData.acquisitionPrice)
+      watchDate: this.state.formData.watchDate
     }
 
     this.setState({ open: false});
-    this.props.initAddPosition(position);
+    this.props.initAddWatchlistItem(item);
   }
 
-  handleInputChange = (target) => {
+  handleTickerSymbolChange = (target) => {
     let updatedFormData = { ...this.state.formData };
-    updatedFormData[target.name] = target.value;
+    updatedFormData.tickerSymbol = target.value;
 
     this.setState({ formData: updatedFormData });
   }
 
-  handleAcquisitionDateChange = (date) => {
+  handleWatchDateChange = (date) => {
     let updatedFormData = { ...this.state.formData };
-    updatedFormData.acquisitionDate = date;
+    updatedFormData.watchDate = date;
 
-    this.setState({ formData: updatedFormData });
+    this.setState({ formData: updatedFormData});
   }
 
   render() {
@@ -84,7 +80,7 @@ class AddPositionFormDialog extends Component {
           variant="outlined"
           color="primary"
           onClick={this.handleOpen}>
-          Add Position
+          Add Watchlist Item
         </Button>
         <Dialog
           fullWidth={true}
@@ -92,7 +88,7 @@ class AddPositionFormDialog extends Component {
           open={this.state.open}
           onClose={this.handleClose}>
           <StyledDialogTitle>
-            Add Position
+            Add Stock
           </StyledDialogTitle>
           <DialogContent className={classes.dialogContent}>
             <TextField
@@ -101,16 +97,7 @@ class AddPositionFormDialog extends Component {
               variant="outlined"
               label="Ticker Symbol"
               name="tickerSymbol"
-              onChange={(event) => this.handleInputChange(event.target)}
-            />
-            <TextField
-              className={classes.formInput}
-              required
-              variant="outlined"
-              label="Quantity"
-              name="quantity"
-              type="number"
-              onChange={(event) => this.handleInputChange(event.target)}
+              onChange={(event) => this.handleTickerSymbolChange(event.target)}
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -119,21 +106,12 @@ class AddPositionFormDialog extends Component {
                 disableFuture
                 variant="inline"
                 format="MM/dd/yyyy"
-                label="Acquisition Date"
-                name="acquisitionDate"
-                value={this.state.formData.acquisitionDate}
-                onChange={this.handleAcquisitionDateChange}
+                label="Watch Date"
+                name="watchDate"
+                value={this.state.formData.watchDate}
+                onChange={this.handleWatchDateChange}
               />
             </MuiPickersUtilsProvider>
-            <TextField
-              className={classes.formInput}
-              required
-              variant="outlined"
-              label="Acquisition Price"
-              name="acquisitionPrice"
-              type="number"
-              onChange={(event) => this.handleInputChange(event.target)}
-            />
           </DialogContent>
           <DialogActions>
             <Button color="secondary" onClick={this.handleClose}>
@@ -149,14 +127,14 @@ class AddPositionFormDialog extends Component {
   }
 }
 
-AddPositionFormDialog.propTypes = {
+AddWatchlistItemFormDialog.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initAddPosition: (position) => dispatch(actionCreators.initAddPosition(position))
+    initAddWatchlistItem: (item) => dispatch(actionCreators.initAddWatchlistItem(item))
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(AddPositionFormDialog));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(AddWatchlistItemFormDialog));

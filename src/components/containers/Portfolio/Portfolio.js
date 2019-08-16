@@ -15,7 +15,7 @@ const styles = {
     padding: 24,
     minWidth: 1024
   },
-  typography: {
+  header: {
     marginBottom: 12
   }
 }
@@ -29,22 +29,21 @@ class Portfolio extends Component {
     const { classes } = this.props;
     let table = null;
 
-    if (!this.props.isLoading) {
+    if (this.props.isLoaded) {
       table = <PortfolioTable positions={this.props.positions} />
     }
 
     return (
       <Paper className={classes.paper}>
-        <Grid container>
-          <Grid item xs={10}>
+        <Grid className={classes.header} container>
+          <Grid item xs={9}>
             <Typography
-              className={classes.typography}
               variant="h4"
               color="primary">
               Portfolio
             </Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <AddPositionFormDialog></AddPositionFormDialog>
           </Grid>
         </Grid>
@@ -60,8 +59,8 @@ Portfolio.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    positions: state.positions,
-    isLoading: state.isLoading
+    positions: state.positions.positions,
+    isLoaded: state.positions.isLoaded
   }
 }
 
