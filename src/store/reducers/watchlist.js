@@ -32,10 +32,10 @@ const watchlistReducer = (state = initialState, action) => {
       }
     case actionTypes.ADD_WATCHLIST_ITEM_SUCCESS:
       return {
-          ...state,
-          watchlist: state.watchlist.concat(action.newItem),
-          isLoading: false
-        }
+        ...state,
+        watchlist: state.watchlist.concat(action.newItem),
+        isLoading: false
+      }
     case actionTypes.ADD_WATCHLIST_ITEM_FAILURE:
       return {
         ...state,

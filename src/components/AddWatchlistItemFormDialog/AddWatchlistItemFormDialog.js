@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
@@ -10,6 +11,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/picker
 import { withStyles } from '@material-ui/styles';
 
 import { StyledDialogTitle } from '../styled/Dialog/Dialog';
+import * as actionCreators from '../../store/actions/index';
 
 const styles = {
   button: {
@@ -51,7 +53,7 @@ class AddWatchlistItemFormDialog extends Component {
     }
 
     this.setState({ open: false});
-    console.log('Item is: ', item);
+    this.props.initAddWatchlistItem(item);
   }
 
   handleTickerSymbolChange = (target) => {
@@ -129,4 +131,10 @@ AddWatchlistItemFormDialog.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(AddWatchlistItemFormDialog);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initAddWatchlistItem: (item) => dispatch(actionCreators.initAddWatchlistItem(item))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(AddWatchlistItemFormDialog));
