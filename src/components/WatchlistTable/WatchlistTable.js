@@ -29,7 +29,7 @@ const WatchlistTable = (props) => {
         <StyledTableCell align="right">Symbol</StyledTableCell>
         <StyledTableCell align="right">Watch Date</StyledTableCell>
         <StyledTableCell align="right">Watch Price ($)</StyledTableCell>
-        <StyledTableCell align="right">Current Price $($)</StyledTableCell>
+        <StyledTableCell align="right">Current Price ($)</StyledTableCell>
         <StyledTableCell align="right">Gain (%)</StyledTableCell>
         </StyledTableRow>
       </TableHead>

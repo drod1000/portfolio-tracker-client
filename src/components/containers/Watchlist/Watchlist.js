@@ -15,7 +15,7 @@ const styles = {
     padding: 24,
     minWidth: 1024
   },
-  typography: {
+  header: {
     marginBottom: 12
   }
 }
@@ -35,16 +35,15 @@ class Watchlist extends Component {
 
     return (
       <Paper className={classes.paper}>
-        <Grid container>
-          <Grid item xs={10}>
+        <Grid className={classes.header} container>
+          <Grid item xs={9}>
             <Typography
-              className={classes.typography}
               variant="h4"
               color="primary">
               Watchlist
             </Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <AddWatchlistItemFormDialog></AddWatchlistItemFormDialog>
           </Grid>
         </Grid>
