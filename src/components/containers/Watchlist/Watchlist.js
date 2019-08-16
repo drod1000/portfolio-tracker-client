@@ -29,7 +29,7 @@ class Watchlist extends Component {
     const { classes } = this.props;
     let watchlist = null;
 
-    if (!this.props.isLoading) {
+    if (this.props.isLoaded) {
       watchlist = <WatchlistTable watchlist={this.props.watchlist}></WatchlistTable>
     }
 
@@ -61,7 +61,7 @@ Watchlist.propTypes = {
 const mapStateToProps = (state) => {
   return {
     watchlist: state.watchlist.watchlist,
-    isLoading: state.watchlist.isLoading
+    isLoaded: state.watchlist.isLoaded
   }
 }
 

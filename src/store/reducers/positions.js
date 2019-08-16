@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   positions: [],
   isLoading: false,
+  isLoaded: false,
   isError: false
 }
 
@@ -17,7 +18,8 @@ const positionsReducer = (state = initialState, action) => {
       return {
         ...state,
         positions: action.positions,
-        isLoading: false
+        isLoading: false,
+        isLoaded: true
       }
     case actionTypes.LOAD_POSITIONS_FAILURE:
       return {
@@ -25,22 +27,11 @@ const positionsReducer = (state = initialState, action) => {
         isLoading: false,
         isError: true
       }
-    case actionTypes.ADD_POSITION_IN_PROGRESS:
-      return {
-        ...state,
-        isLoading: true
-      }
     case actionTypes.ADD_POSITION_SUCCESS:
       return {
         ...state,
         positions: state.positions.concat(action.newPosition),
         isLoading: false
-      }
-    case actionTypes.ADD_POSITION_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true
       }
     default:
       return state;

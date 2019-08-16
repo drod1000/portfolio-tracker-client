@@ -29,7 +29,7 @@ class Portfolio extends Component {
     const { classes } = this.props;
     let table = null;
 
-    if (!this.props.isLoading) {
+    if (this.props.isLoaded) {
       table = <PortfolioTable positions={this.props.positions} />
     }
 
@@ -61,7 +61,7 @@ Portfolio.propTypes = {
 const mapStateToProps = (state) => {
   return {
     positions: state.positions.positions,
-    isLoading: state.positions.isLoading
+    isLoaded: state.positions.isLoaded
   }
 }
 

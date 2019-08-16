@@ -25,20 +25,20 @@ export const initPositions = () => {
   }
 }
 
-export const loadPositionsInProgress = () => {
+const loadPositionsInProgress = () => {
   return {
     type: actionTypes.LOAD_POSITIONS_IN_PROGRESS
   }
 }
 
-export const loadPositionsSuccess = (positions) => {
+const loadPositionsSuccess = (positions) => {
   return {
     type: actionTypes.LOAD_POSITIONS_SUCCESS,
     positions: positions
   }
 }
 
-export const loadPositionsFailure = () => {
+const loadPositionsFailure = () => {
   return {
     type: actionTypes.LOAD_POSITIONS_FAILURE
   }
@@ -46,33 +46,20 @@ export const loadPositionsFailure = () => {
 
 export const initAddPosition = (position) => {
   return dispatch => {
-    dispatch(addPositionInProgress());
-
     setTimeout(() => {
       const positionWithPrice = {
         ...position,
         currentPrice: 100.00
       }
       dispatch(addPositionSuccess(positionWithPrice));
+      // TODO: Snackbar Message
     }, 1500)
   }
 }
 
-export const addPositionInProgress = () => {
-  return {
-    type: actionTypes.ADD_POSITION_IN_PROGRESS
-  }
-}
-
-export const addPositionSuccess = (position) => {
+const addPositionSuccess = (position) => {
   return {
     type: actionTypes.ADD_POSITION_SUCCESS,
     newPosition: position
-  }
-}
-
-export const addPositionFailure = () => {
-  return {
-    type: actionTypes.ADD_POSITION_FAILURE
   }
 }

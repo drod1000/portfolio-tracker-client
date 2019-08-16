@@ -23,20 +23,20 @@ export const initWatchlist = () => {
   }
 }
 
-export const loadWatchlistInProgress = () => {
+const loadWatchlistInProgress = () => {
   return {
     type: actionTypes.LOAD_WATCHLIST_IN_PROGRESS
   }
 }
 
-export const loadWatchlistSuccess = (watchlist) => {
+const loadWatchlistSuccess = (watchlist) => {
   return {
     type: actionTypes.LOAD_WATCHLIST_SUCCESS,
     watchlist: watchlist
   }
 }
 
-export const loadWatchlistFailure = () => {
+const loadWatchlistFailure = () => {
   return {
     type: actionTypes.LOAD_WATCHLIST_FAILURE
   }
@@ -44,8 +44,6 @@ export const loadWatchlistFailure = () => {
 
 export const initAddWatchlistItem = (item) => {
   return dispatch => {
-    dispatch(addWatchlistItemInProgress());
-
     setTimeout(() => {
       const itemWithPrice = {
         ...item,
@@ -53,25 +51,14 @@ export const initAddWatchlistItem = (item) => {
         currentPrice: 75.00
       }
       dispatch(addWatchlistItemSuccess(itemWithPrice));
+      // TODO: Snackbar Message
     }, 1500)
   }
 }
 
-export const addWatchlistItemInProgress = () => {
-  return {
-    type: actionTypes.ADD_WATCHLIST_ITEM_IN_PROGRESS
-  }
-}
-
-export const addWatchlistItemSuccess = (item) => {
+const addWatchlistItemSuccess = (item) => {
   return {
     type: actionTypes.ADD_WATCHLIST_ITEM_SUCCESS,
     newItem: item
-  }
-}
-
-export const addWatchlistItemFailure = () => {
-  return {
-    type: actionTypes.ADD_WATCHLIST_ITEM_FAILURE
   }
 }
