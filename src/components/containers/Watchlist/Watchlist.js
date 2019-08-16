@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 
+import WatchlistTable from '../../WatchlistTable/WatchlistTable';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
@@ -28,7 +29,7 @@ class Watchlist extends Component {
     let watchlist = null;
 
     if (!this.props.isLoading) {
-      watchlist = this.props.watchlist.map(i => (<div key={i.symbol}>{i.symbol}</div>))
+      watchlist = <WatchlistTable watchlist={this.props.watchlist}></WatchlistTable>
     }
 
     return (
