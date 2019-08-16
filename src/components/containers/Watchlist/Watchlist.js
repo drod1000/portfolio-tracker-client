@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 
 import WatchlistTable from '../../WatchlistTable/WatchlistTable';
+import AddWatchlistItemFormDialog from '../../AddWatchlistItemFormDialog/AddWatchlistItemFormDialog';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
@@ -44,7 +45,7 @@ class Watchlist extends Component {
             </Typography>
           </Grid>
           <Grid item xs={2}>
-            <div>Add Dialog Button</div>
+            <AddWatchlistItemFormDialog></AddWatchlistItemFormDialog>
           </Grid>
         </Grid>
         {watchlist}
