@@ -13,14 +13,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Layout = () => {
+const Layout = (props) => {
   const classes = useStyles();
 
   return (
     <Aux>
       <PortfolioTrackerAppBar />
       <Box className={classes.main}>
-        <PortfolioTrackerNavbar />
+        {props.children}
       </Box>
     </Aux>
   )
