@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
 
-import { StyledDialogTitle } from '../Styled/Dialog/Dialog';
+import { StyledDialogTitle } from '../styled/Dialog/Dialog';
 import * as actionCreators from '../../store/actions/index';
 
 const styles = {

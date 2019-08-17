@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/styles';
 
 import PortfolioTable from '../../PortfolioTable/PortfolioTable';
 import AddPositionFormDialog from '../../AddPositionFormDialog/AddPositionFormDialog';
-import { Spinner } from '../../Styled/Feedback/Spinner';
+import { Spinner } from '../../styled/Feedback/Spinner';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {

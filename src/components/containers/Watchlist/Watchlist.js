@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/styles';
 
 import WatchlistTable from '../../WatchlistTable/WatchlistTable';
 import AddWatchlistItemFormDialog from '../../AddWatchlistItemFormDialog/AddWatchlistItemFormDialog';
-import { Spinner } from '../../Styled/Feedback/Spinner';
+import { Spinner } from '../../styled/Feedback/Spinner';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
