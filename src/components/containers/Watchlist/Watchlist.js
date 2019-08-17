@@ -12,8 +12,8 @@ import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
   paper: {
-    padding: 24,
-    minWidth: 1024
+    flexGrow: 1,
+    padding: 24
   },
   header: {
     marginBottom: 12
@@ -36,14 +36,14 @@ class Watchlist extends Component {
     return (
       <Paper className={classes.paper}>
         <Grid className={classes.header} container>
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <Typography
               variant="h4"
               color="primary">
               Watchlist
             </Typography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <AddWatchlistItemFormDialog></AddWatchlistItemFormDialog>
           </Grid>
         </Grid>

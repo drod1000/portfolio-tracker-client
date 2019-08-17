@@ -8,7 +8,7 @@ export const StyledTableRow = withStyles(theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
-}))(TableRow);
+}))(TableRow)
 
 export const StyledTableCell = withStyles(theme => ({
   head: {
@@ -24,4 +24,4 @@ export const StyledTableCell = withStyles(theme => ({
       color: '#f44336'
     }
   }
-}))(TableCell);
+}))(TableCell)
