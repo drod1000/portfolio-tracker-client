@@ -38,8 +38,10 @@ const a11yProps = (index) => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1
+  },
+  appBar: {
+    marginBottom: 24
   }
 }))
 
@@ -53,7 +55,7 @@ const PortfolioTrackerNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
           <Tab label="Portfolio" {...a11yProps(0)} />
           <Tab label="Watchlist" {...a11yProps(1)} />
