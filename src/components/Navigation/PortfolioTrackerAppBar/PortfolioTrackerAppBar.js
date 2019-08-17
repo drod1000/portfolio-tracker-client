@@ -3,7 +3,7 @@ import { AppBar } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/styles';
 
-import { WhiteTypography }from '../../styled/Typography/Typography';
+import { WhiteTypography }from '../../Styled/Typography/Typography';
 
 const useStyles = makeStyles({
   root: {

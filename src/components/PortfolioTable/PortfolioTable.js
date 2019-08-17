@@ -3,7 +3,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 
-import { StyledTableRow, StyledTableCell } from '../styled/Table/Table';
+import { StyledTableRow, StyledTableCell } from '../Styled/Table/Table';
 
 const generateRows = (positions) => {
   const rows = positions.map(p => {
