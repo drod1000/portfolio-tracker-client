@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/styles';
 
 import WatchlistTable from '../../WatchlistTable/WatchlistTable';
 import AddWatchlistItemFormDialog from '../../AddWatchlistItemFormDialog/AddWatchlistItemFormDialog';
+import { Spinner } from '../../styled/Feedback/Spinner';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
@@ -28,6 +29,10 @@ class Watchlist extends Component {
   render() {
     const { classes } = this.props;
     let watchlist = null;
+
+    if (this.props.isLoading) {
+      watchlist = <Spinner />
+    }
 
     if (this.props.isLoaded) {
       watchlist = <WatchlistTable watchlist={this.props.watchlist}></WatchlistTable>
@@ -60,6 +65,7 @@ Watchlist.propTypes = {
 const mapStateToProps = (state) => {
   return {
     watchlist: state.watchlist.watchlist,
+    isLoading: state.watchlist.isLoading,
     isLoaded: state.watchlist.isLoaded
   }
 }

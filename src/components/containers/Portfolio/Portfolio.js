@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/styles';
 
 import PortfolioTable from '../../PortfolioTable/PortfolioTable';
 import AddPositionFormDialog from '../../AddPositionFormDialog/AddPositionFormDialog';
+import { Spinner } from '../../styled/Feedback/Spinner';
 import * as actionCreators from '../../../store/actions/index';
 
 const styles = {
@@ -28,6 +29,10 @@ class Portfolio extends Component {
   render() {
     const { classes } = this.props;
     let table = null;
+
+    if (this.props.isLoading) {
+      table = <Spinner />
+    }
 
     if (this.props.isLoaded) {
       table = <PortfolioTable positions={this.props.positions} />
@@ -60,6 +65,7 @@ Portfolio.propTypes = {
 const mapStateToProps = (state) => {
   return {
     positions: state.positions.positions,
+    isLoading: state.positions.isLoading,
     isLoaded: state.positions.isLoaded
   }
 }
