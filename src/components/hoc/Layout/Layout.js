@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Aux from '../Aux/Aux';
 import PortfolioTrackerAppBar from '../../Navigation/PortfolioTrackerAppBar/PortfolioTrackerAppBar';
-import PortfolioTrackerNavbar from '../../Navigation/PortfolioTrackerNavbar/PortfolioTrackerNavbar';
 
 const useStyles = makeStyles(theme => ({
   main: {

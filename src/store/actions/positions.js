@@ -2,10 +2,6 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
-const createData = (symbol, quantity, buyPrice, currentPrice) => {
-  return { symbol, quantity, buyPrice, currentPrice };
-}
-
 export const initPositions = () => {
   return (dispatch, getState) => {
     const { positions } = getState();
