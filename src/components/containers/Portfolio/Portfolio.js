@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/styles';
 
 import PortfolioTable from '../../PortfolioTable/PortfolioTable';
 import AddPositionFormDialog from '../../AddPositionFormDialog/AddPositionFormDialog';
+import PortfolioPieChartDialog from '../../PortolioPieChartDialog/PortfolioPieChartDialog';
 import { Spinner } from '../../styled/Feedback/Spinner';
 import * as actionCreators from '../../../store/actions/index';
 
@@ -18,6 +19,11 @@ const styles = {
   },
   header: {
     marginBottom: 12
+  },
+  centerVertical: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   }
 }
 
@@ -41,14 +47,17 @@ class Portfolio extends Component {
     return (
       <Paper className={classes.paper}>
         <Grid className={classes.header} container>
-          <Grid item xs={10}>
+          <Grid item xs={9}>
             <Typography
               variant="h4"
               color="primary">
               Portfolio
             </Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
+            <PortfolioPieChartDialog></PortfolioPieChartDialog>
+          </Grid>
+          <Grid className={classes.centerVertical} item xs={2}>
             <AddPositionFormDialog></AddPositionFormDialog>
           </Grid>
         </Grid>
