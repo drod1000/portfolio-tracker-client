@@ -11,22 +11,14 @@ export const initPositions = () => {
     const { positions } = getState();
     if (positions.isLoading || positions.isLoaded) { return; }
 
-    dispatch(loadPositionsInProgress());
-    setTimeout(() => {
-      const positions = [
-        createData('AAPL', 10, 160.00, 175.00),
-        createData('FB', 20, 150.00, 200.00),
-        createData('SBUX', 25, 55.00, 80.00),
-        createData('PEP', 15, 135.00, 125.00),
-        createData('TSN', 30, 72.00, 80.00),
-        createData('WM', 30, 90.00, 125.00),
-        createData('TGT', 50, 70.00, 75.00),
-        createData('ALL', 20, 85.00, 100.00),
-        createData('DIS', 15, 100.00, 125.00),
-        createData('NKE', 20, 120.00, 100.00)
-      ];
-      dispatch(loadPositionsSuccess(positions));
-    }, 3000)
+      dispatch(loadPositionsInProgress());
+      axios.get('http://localhost:3000/positions')
+        .then(response => {
+          dispatch(loadPositionsSuccess(response.data));
+        })
+        .catch(error => {
+          dispatch(loadPositionsFailure());
+        });
   }
 }
 
