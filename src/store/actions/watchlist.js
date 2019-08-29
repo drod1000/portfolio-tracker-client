@@ -1,8 +1,6 @@
-import * as actionTypes from './actionTypes';
+import axios from 'axios';
 
-const createData = (symbol, watchDate, watchPrice, currentPrice) => {
-  return { symbol, watchDate, watchPrice, currentPrice };
-}
+import * as actionTypes from './actionTypes';
 
 export const initWatchlist = () => {
   return (dispatch, getState) => {
@@ -10,19 +8,13 @@ export const initWatchlist = () => {
     if (watchlist.isLoading || watchlist.isLoaded) { return; }
 
     dispatch(loadWatchlistInProgress());
-    setTimeout(() => {
-      const watchlist = [
-        createData('WFC', new Date(2019, 1, 15), 50.00, 45.00),
-        createData('CI', new Date(2019, 1, 15), 72.00, 60.00),
-        createData('GOOGL', new Date(2019, 1, 15), 1200.00, 1000),
-        createData('CVS', new Date(2019, 1, 15), 65.00, 55.00),
-        createData('XOM', new Date(2019, 1, 15), 80.00, 68.00),
-        createData('WOW', new Date(2019, 1, 15), 100.00, 90.00),
-        createData('WOWER', new Date(2019, 1, 15), 110.00, 80.00),
-        createData('WOWEST', new Date(2019, 1, 15), 105.00, 85.00)
-      ];
-      dispatch(loadWatchlistSuccess(watchlist));
-    }, 3000)
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/watchlist`)
+      .then(response => {
+        dispatch(loadWatchlistSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(loadWatchlistFailure());
+      });
   }
 }
 
@@ -47,15 +39,13 @@ const loadWatchlistFailure = () => {
 
 export const initAddWatchlistItem = (item) => {
   return dispatch => {
-    setTimeout(() => {
-      const itemWithPrice = {
-        ...item,
-        watchPrice: 80.00,
-        currentPrice: 75.00
-      }
-      dispatch(addWatchlistItemSuccess(itemWithPrice));
-      // TODO: Snackbar Message
-    }, 1500)
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/watchlist`, item)
+      .then(response => {
+        dispatch(addWatchlistItemSuccess(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
 

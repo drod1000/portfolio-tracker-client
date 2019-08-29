@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
@@ -33,7 +34,8 @@ class AddWatchlistItemFormDialog extends Component {
       open: false,
       formData: {
         tickerSymbol: '',
-        watchDate: new Date()
+        watchDate: new Date(),
+        watchPrice: null
       }
     }
   }
@@ -47,18 +49,20 @@ class AddWatchlistItemFormDialog extends Component {
   }
 
   handleSave = () => {
+    const formattedDate = moment(this.state.formData.acquisitionDate).format('YYYY-MM-DD');
     const item = {
-      symbol: this.state.formData.tickerSymbol,
-      watchDate: this.state.formData.watchDate
+      StockSymbol: this.state.formData.tickerSymbol,
+      WatchDate: formattedDate,
+      WatchPrice: this.state.formData.watchPrice
     }
 
     this.setState({ open: false});
     this.props.initAddWatchlistItem(item);
   }
 
-  handleTickerSymbolChange = (target) => {
+  handleInputChange = (target) => {
     let updatedFormData = { ...this.state.formData };
-    updatedFormData.tickerSymbol = target.value;
+    updatedFormData[target.name] = target.value;
 
     this.setState({ formData: updatedFormData });
   }
@@ -97,7 +101,7 @@ class AddWatchlistItemFormDialog extends Component {
               variant="outlined"
               label="Ticker Symbol"
               name="tickerSymbol"
-              onChange={(event) => this.handleTickerSymbolChange(event.target)}
+              onChange={(event) => this.handleInputChange(event.target)}
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -112,6 +116,14 @@ class AddWatchlistItemFormDialog extends Component {
                 onChange={this.handleWatchDateChange}
               />
             </MuiPickersUtilsProvider>
+            <TextField
+              className={classes.formInput}
+              required
+              variant="outlined"
+              label="Watch Price"
+              name="watchPrice"
+              onChange={(event) => this.handleInputChange(event.target)}
+            />
           </DialogContent>
           <DialogActions>
             <Button color="secondary" onClick={this.handleClose}>

@@ -8,12 +8,12 @@ import { StyledTableRow, StyledTableCell } from '../styled/Table/Table';
 const generateRows = (positions) => {
   const rows = positions.map(p => {
     return {
-      symbol: p.symbol,
-      quantity: p.quantity,
-      currentPrice: p.currentPrice,
-      marketValue: (p.currentPrice * p.quantity),
-      dollarGain: ((p.currentPrice - p.buyPrice) * p.quantity),
-      percentageGain: ((p.currentPrice - p.buyPrice) / p.currentPrice * 100)
+      symbol: p.StockSymbol,
+      quantity: p.Quantity,
+      currentPrice: p.CurrentPrice,
+      marketValue: (p.CurrentPrice * p.Quantity),
+      dollarGain: ((p.CurrentPrice - p.BuyPrice) * p.Quantity),
+      percentageGain: ((p.CurrentPrice - p.BuyPrice) / p.CurrentPrice * 100)
     }
   })
 

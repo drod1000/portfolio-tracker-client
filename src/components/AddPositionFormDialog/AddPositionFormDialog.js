@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
@@ -49,11 +50,12 @@ class AddPositionFormDialog extends Component {
   }
 
   handleSave = () => {
+    const formattedDate = moment(this.state.formData.acquisitionDate).format('YYYY-MM-DD');
     const position = {
-      symbol: this.state.formData.tickerSymbol,
-      quantity: Number(this.state.formData.quantity),
-      acquisitionDate: this.state.formData.acquisitionDate,
-      buyPrice: Number(this.state.formData.acquisitionPrice)
+      StockSymbol: this.state.formData.tickerSymbol,
+      Quantity: Number(this.state.formData.quantity),
+      BuyDate: formattedDate,
+      BuyPrice: Number(this.state.formData.acquisitionPrice)
     }
 
     this.setState({ open: false});
