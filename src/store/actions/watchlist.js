@@ -2,17 +2,13 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
-const createData = (symbol, watchDate, watchPrice, currentPrice) => {
-  return { symbol, watchDate, watchPrice, currentPrice };
-}
-
 export const initWatchlist = () => {
   return (dispatch, getState) => {
     const { watchlist } = getState();
     if (watchlist.isLoading || watchlist.isLoaded) { return; }
 
     dispatch(loadWatchlistInProgress());
-    axios.get('http://localhost:3000/watchlist')
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/watchlist`)
       .then(response => {
         dispatch(loadWatchlistSuccess(response.data));
       })
@@ -43,7 +39,7 @@ const loadWatchlistFailure = () => {
 
 export const initAddWatchlistItem = (item) => {
   return dispatch => {
-    axios.post('http://localhost:3000/watchlist', item)
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/watchlist`, item)
       .then(response => {
         dispatch(addWatchlistItemSuccess(response.data));
       })

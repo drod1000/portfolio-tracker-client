@@ -8,7 +8,7 @@ export const initPositions = () => {
     if (positions.isLoading || positions.isLoaded) { return; }
 
       dispatch(loadPositionsInProgress());
-      axios.get('http://localhost:3000/positions')
+      axios.get(`${process.env.REACT_APP_API_BASE_URL}/positions`)
         .then(response => {
           dispatch(loadPositionsSuccess(response.data));
         })
@@ -39,7 +39,7 @@ const loadPositionsFailure = () => {
 
 export const initAddPosition = (position) => {
   return dispatch => {
-    axios.post('http://localhost:3000/positions', position)
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/positions`, position)
       .then(response => {
         dispatch(addPositionSuccess(response.data));
       })
