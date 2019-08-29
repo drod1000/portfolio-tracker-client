@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import * as actionTypes from './actionTypes';
 
 const createData = (symbol, watchDate, watchPrice, currentPrice) => {
@@ -47,15 +49,13 @@ const loadWatchlistFailure = () => {
 
 export const initAddWatchlistItem = (item) => {
   return dispatch => {
-    setTimeout(() => {
-      const itemWithPrice = {
-        ...item,
-        watchPrice: 80.00,
-        currentPrice: 75.00
-      }
-      dispatch(addWatchlistItemSuccess(itemWithPrice));
-      // TODO: Snackbar Message
-    }, 1500)
+    axios.post('http://localhost:3000/watchlist', item)
+      .then(response => {
+        dispatch(addWatchlistItemSuccess(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
 
