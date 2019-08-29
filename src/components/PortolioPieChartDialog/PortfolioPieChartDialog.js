@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import PieChart from '@material-ui/icons/PieChart';
 import { makeStyles } from '@material-ui/styles';
 
+import PortfolioPieChart from '../PortfolioPieChart/PortfolioPieChart';
+
 const useStyles = makeStyles({
   centerButton : {
     display: 'block',
@@ -11,7 +13,7 @@ const useStyles = makeStyles({
   }
 });
 
-const PortfolioPieChartDialog = () => {
+const PortfolioPieChartDialog = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -33,7 +35,7 @@ const PortfolioPieChartDialog = () => {
         maxWidth='lg'
         open={open}
         onClose={handleClose}>
-          Pie Chart Goes Here
+          <PortfolioPieChart positions={props.positions}/>
       </Dialog>
     </div>
   )

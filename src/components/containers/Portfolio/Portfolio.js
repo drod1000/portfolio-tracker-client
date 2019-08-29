@@ -55,7 +55,7 @@ class Portfolio extends Component {
             </Typography>
           </Grid>
           <Grid item xs={1}>
-            <PortfolioPieChartDialog></PortfolioPieChartDialog>
+            <PortfolioPieChartDialog positions={this.props.positions}></PortfolioPieChartDialog>
           </Grid>
           <Grid className={classes.centerVertical} item xs={2}>
             <AddPositionFormDialog></AddPositionFormDialog>
