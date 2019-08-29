@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
@@ -7,12 +8,13 @@ import { StyledTableRow, StyledTableCell } from '../styled/Table/Table';
 
 const generateRows = (watchlist) => {
   const rows = watchlist.map(p => {
+    const formattedDate = moment(p).format('MM/DD/YYYY');
     return {
-      symbol: p.symbol,
-      watchDate: new Intl.DateTimeFormat('en-US').format(p.watchDate).toString(),
-      watchPrice: p.watchPrice,
-      currentPrice: p.currentPrice,
-      percentageGain: ((p.currentPrice - p.watchPrice) / p.currentPrice * 100)
+      symbol: p.StockSymbol,
+      watchDate: formattedDate,
+      watchPrice: p.WatchPrice,
+      currentPrice: p.CurrentPrice,
+      percentageGain: ((p.CurrentPrice - p.WatchPrice) / p.CurrentPrice * 100)
     }
   })
 
@@ -38,8 +40,8 @@ const WatchlistTable = (props) => {
           <StyledTableRow key={i.symbol}>
             <StyledTableCell align="right">{i.symbol}</StyledTableCell>
             <StyledTableCell align="right">{i.watchDate}</StyledTableCell>
-            <StyledTableCell align="right">${i.watchPrice}</StyledTableCell>
-            <StyledTableCell align="right">${i.currentPrice}</StyledTableCell>
+            <StyledTableCell align="right">${i.watchPrice.toFixed(2)}</StyledTableCell>
+            <StyledTableCell align="right">${i.currentPrice.toFixed(2)}</StyledTableCell>
             <StyledTableCell
               className={i.percentageGain >= 0 ? 'positive' : 'negative'}
               align="right">{i.percentageGain.toFixed(2)}
