@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import * as actionTypes from './actionTypes';
 
 const createData = (symbol, quantity, buyPrice, currentPrice) => {
@@ -49,14 +51,13 @@ const loadPositionsFailure = () => {
 
 export const initAddPosition = (position) => {
   return dispatch => {
-    setTimeout(() => {
-      const positionWithPrice = {
-        ...position,
-        currentPrice: 100.00
-      }
-      dispatch(addPositionSuccess(positionWithPrice));
-      // TODO: Snackbar Message
-    }, 1500)
+    axios.post('http://localhost:3000/positions', position)
+      .then(response => {
+        dispatch(addPositionSuccess(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
 
