@@ -5,6 +5,7 @@ import PieChart from '@material-ui/icons/PieChart';
 import { makeStyles } from '@material-ui/styles';
 
 import PortfolioPieChart from '../PortfolioPieChart/PortfolioPieChart';
+import { StyledDialogTitle } from '../styled/Dialog/Dialog';
 
 const useStyles = makeStyles({
   centerButton : {
@@ -32,9 +33,12 @@ const PortfolioPieChartDialog = (props) => {
       </IconButton>
       <Dialog
         fullWidth={true}
-        maxWidth='lg'
+        maxWidth='sm'
         open={open}
         onClose={handleClose}>
+          <StyledDialogTitle>
+            Portfolio Breakdown
+          </StyledDialogTitle>
           <PortfolioPieChart positions={props.positions}/>
       </Dialog>
     </div>
