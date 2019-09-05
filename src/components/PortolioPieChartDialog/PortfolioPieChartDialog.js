@@ -33,7 +33,7 @@ const PortfolioPieChartDialog = (props) => {
       </IconButton>
       <Dialog
         fullWidth={true}
-        maxWidth='sm'
+        maxWidth='md'
         open={open}
         onClose={handleClose}>
           <StyledDialogTitle>
