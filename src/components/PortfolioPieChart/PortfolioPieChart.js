@@ -40,8 +40,15 @@ const PortfolioPieChart = (props) => {
                 {`${data[index].stockSymbol} (${(percent * 100).toFixed(2)}%)`}
               </text>
             )
-          }}/>
-        <Tooltip />
+          }}
+        />
+        <Tooltip
+          formatter={(value) => {
+            return (
+              `$${value.toFixed(2)}`
+            )
+          }}
+        />
       </PieChart>
     </ResponsiveContainer>
   )
