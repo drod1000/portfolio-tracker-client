@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
@@ -11,6 +12,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/picker
 import { withStyles } from '@material-ui/styles';
 
 import { StyledDialogTitle } from '../styled/Dialog/Dialog';
+import * as actionCreators from '../../store/actions/index';
 
 const styles = {
   main: {
@@ -42,14 +44,15 @@ class ClosePositionFormDialog extends Component {
 
   handleSave = () => {
     const formattedDate = moment(this.state.formData.buyDate).format('YYYY-MM-DD');
-    const cancelPositionPayload = {
+    const closePositionPayload = {
       PositionId: this.props.stockPosition.positionId,
       Quantity: Number(this.state.formData.quantity),
       SellDate: formattedDate,
       SellPrice: Number(this.state.formData.sellPrice)
     }
 
-    console.log(cancelPositionPayload);
+    this.setState({ open: false });
+    this.props.initClosePosition(closePositionPayload);
   }
 
   handleOpen = () => {
@@ -158,4 +161,10 @@ ClosePositionFormDialog.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(ClosePositionFormDialog);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initClosePosition: (closePositionPayload) => dispatch(actionCreators.initClosePosition(closePositionPayload))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ClosePositionFormDialog));
