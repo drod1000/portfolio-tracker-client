@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import ClosePositionDialog from '../ClosePositionFormDialog/ClosePositionFormDialog';
+
 const StockPositionMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -25,7 +27,9 @@ const StockPositionMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Close Position</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ClosePositionDialog stockPosition={props.stockPosition}/>
+        </MenuItem>
         <MenuItem onClick={handleClose}>View Chart</MenuItem>
       </Menu>
     </div>

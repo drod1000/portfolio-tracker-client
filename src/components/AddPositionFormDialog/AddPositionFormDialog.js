@@ -152,7 +152,7 @@ class AddPositionFormDialog extends Component {
 }
 
 AddPositionFormDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = (dispatch) => {
