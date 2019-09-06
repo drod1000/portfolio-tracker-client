@@ -55,3 +55,34 @@ const addPositionSuccess = (position) => {
     newPosition: position
   }
 }
+
+export const initClosePosition = (closePositionPayload) => {
+  return dispatch => {
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/position/close`, closePositionPayload)
+      .then(response => {
+        const closePositionResult = response.data;
+        if (closePositionResult.Quantity === 0) {
+          dispatch(removePosition(closePositionResult.PositionId));
+        } else {
+          dispatch(updatePositionQuantity(closePositionResult.PositionId, closePositionResult.Quantity));
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+}
+
+const removePosition = (positionId) => {
+  return {
+    type: actionTypes.REMOVE_POSITION,
+    positionId: positionId
+  }
+}
+
+const updatePositionQuantity = (positionId, quantity) => {
+  return {
+    type: actionTypes.UPDATE_POSITION_QUANTITY,
+    payload: { PositionId: positionId, Quantity: quantity }
+  }
+}

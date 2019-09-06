@@ -1,6 +1,7 @@
 export {
   initPositions,
-  initAddPosition
+  initAddPosition,
+  initClosePosition
 } from './positions';
 
 export {
