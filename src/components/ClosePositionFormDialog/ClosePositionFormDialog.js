@@ -70,9 +70,9 @@ class ClosePositionFormDialog extends Component {
     this.setState({ formData: updatedFormData });
   }
 
-  handleBuyDateChange = (date) => {
+  handleSellDateChange = (date) => {
     let updatedFormData = { ...this.state.formData };
-    updatedFormData.buyDate = date;
+    updatedFormData.sellDate = date;
 
     this.setState({ formData: updatedFormData });
   }

@@ -58,7 +58,7 @@ const addPositionSuccess = (position) => {
 
 export const initClosePosition = (closePositionPayload) => {
   return dispatch => {
-    axios.post(`${process.env.REACT_APP_API_BASE_URL}/position/close`, closePositionPayload)
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/positions/close`, closePositionPayload)
       .then(response => {
         const closePositionResult = response.data;
         if (closePositionResult.Quantity === 0) {
