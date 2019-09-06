@@ -9,6 +9,7 @@ import StockPositionMenu from '../StockPositionMenu/StockPositionMenu';
 const generateRows = (positions) => {
   const rows = positions.map(p => {
     return {
+      positionId: p.PositionId,
       symbol: p.StockSymbol,
       quantity: p.Quantity,
       currentPrice: p.CurrentPrice,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
@@ -37,6 +38,18 @@ class ClosePositionFormDialog extends Component {
         sellPrice: null
       }
     }
+  }
+
+  handleSave = () => {
+    const formattedDate = moment(this.state.formData.buyDate).format('YYYY-MM-DD');
+    const cancelPositionPayload = {
+      PositionId: this.props.stockPosition.positionId,
+      Quantity: Number(this.state.formData.quantity),
+      SellDate: formattedDate,
+      SellPrice: Number(this.state.formData.sellPrice)
+    }
+
+    console.log(cancelPositionPayload);
   }
 
   handleOpen = () => {
@@ -124,7 +137,6 @@ class ClosePositionFormDialog extends Component {
               label="Sell Price"
               name="sellPrice"
               type="number"
-              value={this.state.formData.sellPrice}
               onChange={(event) => this.handleInputChange(event.target)}
             />
           </DialogContent>
