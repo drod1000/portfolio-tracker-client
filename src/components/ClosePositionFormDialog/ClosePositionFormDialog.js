@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import DateFnsUtils from '@date-io/date-fns';
+import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import { MuiPickersUtilsProvider, KeyboardDatePicker}  from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
 
 import { StyledDialogTitle } from '../styled/Dialog/Dialog';
@@ -24,8 +29,12 @@ class ClosePositionFormDialog extends Component {
     super(props);
     this.state = {
       open: false,
+      maxQuantity: this.props.stockPosition.quantity,
       formData: {
-
+        symbol: this.props.stockPosition.symbol,
+        quantity: this.props.stockPosition.quantity,
+        sellDate: new Date(),
+        sellPrice: null
       }
     }
   }
@@ -36,6 +45,20 @@ class ClosePositionFormDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  }
+
+  handleInputChange = (target) => {
+    let updatedFormData = { ...this.state.formData };
+    updatedFormData[target.name] = target.value;
+
+    this.setState({ formData: updatedFormData });
+  }
+
+  handleBuyDateChange = (date) => {
+    let updatedFormData = { ...this.state.formData };
+    updatedFormData.buyDate = date;
+
+    this.setState({ formData: updatedFormData });
   }
 
   render() {
@@ -59,9 +82,60 @@ class ClosePositionFormDialog extends Component {
           <StyledDialogTitle>
             Close Position
           </StyledDialogTitle>
-          <DialogContent>
-            Dialog content goes here
+          <DialogContent className={classes.dialogContent}>
+            <TextField
+              className={classes.formInput}
+              required
+              disabled
+              variant="outlined"
+              label="Ticker Symbol"
+              name="symbol"
+              value={this.state.formData.symbol}
+              onChange={(event) => this.handleInputChange(event.target)}
+            />
+            <TextField
+              className={classes.formInput}
+              required
+              variant="outlined"
+              label="Quantity"
+              name="quantity"
+              type="number"
+              InputProps={{ inputProps: { min: 1, max: this.state.maxQuantity } }}
+              value={this.state.formData.quantity}
+              onChange={(event) => this.handleInputChange(event.target)}
+            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                className={classes.formInput}
+                disableToolbar
+                disableFuture
+                variant="inline"
+                format="MM/dd/yyyy"
+                label="Sell Date"
+                name="sellDate"
+                value={this.state.formData.sellDate}
+                onChange={this.handleSellDateChange}
+              />
+            </MuiPickersUtilsProvider>
+            <TextField
+              className={classes.formInput}
+              required
+              variant="outlined"
+              label="Sell Price"
+              name="sellPrice"
+              type="number"
+              value={this.state.formData.sellPrice}
+              onChange={(event) => this.handleInputChange(event.target)}
+            />
           </DialogContent>
+          <DialogActions>
+            <Button color="secondary" onClick={this.handleClose}>
+              Cancel
+            </Button>
+            <Button color="primary" onClick={this.handleSave}>
+              Save
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     )
