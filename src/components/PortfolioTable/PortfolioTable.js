@@ -4,10 +4,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 
 import { StyledTableRow, StyledTableCell } from '../styled/Table/Table';
+import StockPositionMenu from '../StockPositionMenu/StockPositionMenu';
 
 const generateRows = (positions) => {
   const rows = positions.map(p => {
     return {
+      positionId: p.PositionId,
       symbol: p.StockSymbol,
       quantity: p.Quantity,
       currentPrice: p.CurrentPrice,
@@ -38,7 +40,9 @@ const PortfolioTable = (props) => {
       <TableBody>
         {rows.map(p => (
           <StyledTableRow key={p.symbol}>
-            <StyledTableCell align="right">{p.symbol}</StyledTableCell>
+            <StyledTableCell align="right">
+              <StockPositionMenu stockPosition={p}/>
+            </StyledTableCell>
             <StyledTableCell align="right">{p.quantity}</StyledTableCell>
             <StyledTableCell align="right">${p.currentPrice.toFixed(2)}</StyledTableCell>
             <StyledTableCell align="right">${p.marketValue.toFixed(2)}</StyledTableCell>

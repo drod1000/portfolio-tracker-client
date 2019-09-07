@@ -33,6 +33,26 @@ const positionsReducer = (state = initialState, action) => {
         positions: state.positions.concat(action.newPosition),
         isLoading: false
       }
+    case actionTypes.REMOVE_POSITION:
+      return {
+        ...state,
+        positions: state.positions.filter(p => p.PositionId !== action.positionId)
+      }
+    case actionTypes.UPDATE_POSITION_QUANTITY:
+      const updatePayload = action.payload;
+      return {
+        ...state,
+        positions: state.positions.map((p) => {
+          if (p.PositionId === updatePayload.PositionId) {
+            return {
+              ...p,
+              Quantity: updatePayload.Quantity
+            }
+          } else {
+            return p;
+          }
+        })
+      }
     default:
       return state;
   }

@@ -15,7 +15,7 @@ import { StyledDialogTitle } from '../styled/Dialog/Dialog';
 import * as actionCreators from '../../store/actions/index';
 
 const styles = {
-  button: {
+  main: {
     width: '100%'
   },
   dialogContent: {
@@ -27,18 +27,32 @@ const styles = {
   }
 }
 
-class AddPositionFormDialog extends Component {
+class ClosePositionFormDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      maxQuantity: this.props.stockPosition.quantity,
       formData: {
-        tickerSymbol: '',
-        quantity: null,
-        acquisitionDate: new Date(),
-        acquisitionPrice: null
+        symbol: this.props.stockPosition.symbol,
+        quantity: this.props.stockPosition.quantity,
+        sellDate: new Date(),
+        sellPrice: null
       }
     }
+  }
+
+  handleSave = () => {
+    const formattedDate = moment(this.state.formData.buyDate).format('YYYY-MM-DD');
+    const closePositionPayload = {
+      PositionId: this.props.stockPosition.positionId,
+      Quantity: Number(this.state.formData.quantity),
+      SellDate: formattedDate,
+      SellPrice: Number(this.state.formData.sellPrice)
+    }
+
+    this.setState({ open: false });
+    this.props.initClosePosition(closePositionPayload);
   }
 
   handleOpen = () => {
@@ -49,19 +63,6 @@ class AddPositionFormDialog extends Component {
     this.setState({ open: false });
   }
 
-  handleSave = () => {
-    const formattedDate = moment(this.state.formData.acquisitionDate).format('YYYY-MM-DD');
-    const position = {
-      StockSymbol: this.state.formData.tickerSymbol,
-      Quantity: Number(this.state.formData.quantity),
-      BuyDate: formattedDate,
-      BuyPrice: Number(this.state.formData.acquisitionPrice)
-    }
-
-    this.setState({ open: false});
-    this.props.initAddPosition(position);
-  }
-
   handleInputChange = (target) => {
     let updatedFormData = { ...this.state.formData };
     updatedFormData[target.name] = target.value;
@@ -69,9 +70,9 @@ class AddPositionFormDialog extends Component {
     this.setState({ formData: updatedFormData });
   }
 
-  handleAcquisitionDateChange = (date) => {
+  handleSellDateChange = (date) => {
     let updatedFormData = { ...this.state.formData };
-    updatedFormData.acquisitionDate = date;
+    updatedFormData.sellDate = date;
 
     this.setState({ formData: updatedFormData });
   }
@@ -81,28 +82,31 @@ class AddPositionFormDialog extends Component {
 
     return (
       <div>
-        <Button
-          className={classes.button}
+        <div
+          className={classes.main}
           variant="outlined"
           color="primary"
-          onClick={this.handleOpen}>
-          Add Position
-        </Button>
+          onClick={this.handleOpen}
+        >ClosePosition
+        </div>
         <Dialog
           fullWidth={true}
           maxWidth='sm'
           open={this.state.open}
-          onClose={this.handleClose}>
+          onClose={this.handleClose}
+        >
           <StyledDialogTitle>
-            Add Position
+            Close Position
           </StyledDialogTitle>
           <DialogContent className={classes.dialogContent}>
             <TextField
               className={classes.formInput}
               required
+              disabled
               variant="outlined"
               label="Ticker Symbol"
-              name="tickerSymbol"
+              name="symbol"
+              value={this.state.formData.symbol}
               onChange={(event) => this.handleInputChange(event.target)}
             />
             <TextField
@@ -112,6 +116,8 @@ class AddPositionFormDialog extends Component {
               label="Quantity"
               name="quantity"
               type="number"
+              InputProps={{ inputProps: { min: 1, max: this.state.maxQuantity } }}
+              value={this.state.formData.quantity}
               onChange={(event) => this.handleInputChange(event.target)}
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -121,18 +127,18 @@ class AddPositionFormDialog extends Component {
                 disableFuture
                 variant="inline"
                 format="MM/dd/yyyy"
-                label="Acquisition Date"
-                name="acquisitionDate"
-                value={this.state.formData.acquisitionDate}
-                onChange={this.handleAcquisitionDateChange}
+                label="Sell Date"
+                name="sellDate"
+                value={this.state.formData.sellDate}
+                onChange={this.handleSellDateChange}
               />
             </MuiPickersUtilsProvider>
             <TextField
               className={classes.formInput}
               required
               variant="outlined"
-              label="Acquisition Price"
-              name="acquisitionPrice"
+              label="Sell Price"
+              name="sellPrice"
               type="number"
               onChange={(event) => this.handleInputChange(event.target)}
             />
@@ -151,14 +157,14 @@ class AddPositionFormDialog extends Component {
   }
 }
 
-AddPositionFormDialog.propTypes = {
+ClosePositionFormDialog.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initAddPosition: (position) => dispatch(actionCreators.initAddPosition(position))
+    initClosePosition: (closePositionPayload) => dispatch(actionCreators.initClosePosition(closePositionPayload))
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(AddPositionFormDialog));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ClosePositionFormDialog));
