@@ -6,6 +6,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The API for this project can be found here: https://github.com/drod1000/portfolio-tracker-api
 
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/19962197/64623286-52e4b000-d3ae-11e9-9b93-e02f16bd6f13.png)
+
+![image](https://user-images.githubusercontent.com/19962197/64623316-5f690880-d3ae-11e9-8368-95ec4104fd28.png)
+
+![image](https://user-images.githubusercontent.com/19962197/64623329-65f78000-d3ae-11e9-8641-e5494f904f24.png)
+
 ## Tech Used
 
 * [React Redux](https://react-redux.js.org/) - State Management
